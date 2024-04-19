@@ -7,24 +7,24 @@
 # General application configuration
 import Config
 
-config :poll,
+config :panda_polls,
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :poll, PollWeb.Endpoint,
+config :panda_polls, PandaPollsWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: PollWeb.ErrorHTML, json: PollWeb.ErrorJSON],
+    formats: [html: PandaPollsWeb.ErrorHTML, json: PandaPollsWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: Poll.PubSub,
+  pubsub_server: PandaPolls.PubSub,
   live_view: [signing_salt: "aqA2uuWF"]
 
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
-  poll: [
+  panda_polls: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
@@ -34,7 +34,7 @@ config :esbuild,
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.4.0",
-  poll: [
+  panda_polls: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css

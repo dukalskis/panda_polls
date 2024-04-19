@@ -8,8 +8,8 @@ const path = require("path")
 module.exports = {
   content: [
     "./js/**/*.js",
-    "../lib/poll_web.ex",
-    "../lib/poll_web/**/*.*ex"
+    "../lib/panda_polls_web.ex",
+    "../lib/panda_polls_web/**/*.*ex"
   ],
   theme: {
     extend: {

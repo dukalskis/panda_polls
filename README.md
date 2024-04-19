@@ -1,4 +1,4 @@
-# Poll
+# PandaPolls
 
 To start your Phoenix server:
 

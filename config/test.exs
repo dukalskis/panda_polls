@@ -2,7 +2,7 @@ import Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :poll, PollWeb.Endpoint,
+config :panda_polls, PandaPollsWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "JZRp2oFaAWbA+pJt5MXc4NDNxZ1MYbNTsn+PQNXdk1lH095VII/ZtqxF391Z5/Nx",
   server: false

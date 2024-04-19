@@ -6,7 +6,7 @@ import Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
-config :poll, PollWeb.Endpoint,
+config :panda_polls, PandaPollsWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
@@ -15,8 +15,8 @@ config :poll, PollWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "FbQp1diGpBUGkbJyK6bPIPjRBa8DjIXHSawThQHJLEHVJa+3S6m4v35BG3mS/dUY",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:poll, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:poll, ~w(--watch)]}
+    esbuild: {Esbuild, :install_and_run, [:panda_polls, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:panda_polls, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -43,16 +43,16 @@ config :poll, PollWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :poll, PollWeb.Endpoint,
+config :panda_polls, PandaPollsWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"lib/poll_web/(controllers|live|components)/.*(ex|heex)$"
+      ~r"lib/panda_polls_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :poll, dev_routes: true
+config :panda_polls, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

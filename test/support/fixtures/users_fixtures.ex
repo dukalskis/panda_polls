@@ -1,7 +1,7 @@
-defmodule Poll.UsersFixtures do
+defmodule PandaPolls.UsersFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `Poll.Users`.
+  entities via the `PandaPolls.Users`.
   """
 
   def unique_username, do: "username#{System.unique_integer()}"
@@ -16,7 +16,7 @@ defmodule Poll.UsersFixtures do
     {:ok, user} =
       attrs
       |> valid_user_attributes()
-      |> Poll.Users.register_user()
+      |> PandaPolls.Users.register_user()
 
     user
   end

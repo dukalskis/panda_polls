@@ -1,15 +1,15 @@
-defmodule PollWeb.UserAuthTest do
-  use PollWeb.ConnCase, async: true
+defmodule PandaPollsWeb.UserAuthTest do
+  use PandaPollsWeb.ConnCase, async: true
 
   alias Phoenix.LiveView
-  alias Poll.Users
-  alias PollWeb.UserAuth
-  import Poll.UsersFixtures
+  alias PandaPolls.Users
+  alias PandaPollsWeb.UserAuth
+  import PandaPolls.UsersFixtures
 
   setup %{conn: conn} do
     conn =
       conn
-      |> Map.replace!(:secret_key_base, PollWeb.Endpoint.config(:secret_key_base))
+      |> Map.replace!(:secret_key_base, PandaPollsWeb.Endpoint.config(:secret_key_base))
       |> init_test_session(%{})
 
     %{user: user_fixture(), conn: conn}
@@ -52,7 +52,7 @@ defmodule PollWeb.UserAuthTest do
 
     test "broadcasts to the given live_socket_id", %{conn: conn} do
       live_socket_id = "users_sessions:abcdef-token"
-      PollWeb.Endpoint.subscribe(live_socket_id)
+      PandaPollsWeb.Endpoint.subscribe(live_socket_id)
 
       conn
       |> put_session(:live_socket_id, live_socket_id)
@@ -130,7 +130,7 @@ defmodule PollWeb.UserAuthTest do
       session = conn |> put_session(:user_token, user_token) |> get_session()
 
       socket = %LiveView.Socket{
-        endpoint: PollWeb.Endpoint,
+        endpoint: PandaPollsWeb.Endpoint,
         assigns: %{__changed__: %{}, flash: %{}}
       }
 
@@ -142,7 +142,7 @@ defmodule PollWeb.UserAuthTest do
       session = conn |> get_session()
 
       socket = %LiveView.Socket{
-        endpoint: PollWeb.Endpoint,
+        endpoint: PandaPollsWeb.Endpoint,
         assigns: %{__changed__: %{}, flash: %{}}
       }
 

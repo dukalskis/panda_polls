@@ -1,11 +1,11 @@
-defmodule Poll.UsersTest do
-  use Poll.DataCase
+defmodule PandaPolls.UsersTest do
+  use PandaPolls.DataCase
 
-  import Poll.UsersFixtures
+  import PandaPolls.UsersFixtures
 
-  alias Poll.Model.User
-  alias Poll.Model.UserToken
-  alias Poll.Users
+  alias PandaPolls.Model.User
+  alias PandaPolls.Model.UserToken
+  alias PandaPolls.Users
 
   describe "get_user_by_username/1" do
     test "does not return the user if the username does not exist" do

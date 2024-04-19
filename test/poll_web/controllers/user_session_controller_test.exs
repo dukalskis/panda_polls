@@ -1,7 +1,7 @@
-defmodule PollWeb.UserSessionControllerTest do
-  use PollWeb.ConnCase, async: true
+defmodule PandaPollsWeb.UserSessionControllerTest do
+  use PandaPollsWeb.ConnCase, async: true
 
-  import Poll.UsersFixtures
+  import PandaPolls.UsersFixtures
 
   setup do
     %{user: user_fixture()}

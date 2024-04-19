@@ -1,8 +1,8 @@
-defmodule PollWeb.UserLoginLiveTest do
-  use PollWeb.ConnCase, async: true
+defmodule PandaPollsWeb.UserLoginLiveTest do
+  use PandaPollsWeb.ConnCase, async: true
 
   import Phoenix.LiveViewTest
-  import Poll.UsersFixtures
+  import PandaPolls.UsersFixtures
 
   describe "Log in page" do
     test "renders log in page", %{conn: conn} do

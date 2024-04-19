@@ -1,4 +1,4 @@
-defmodule Poll.DataCase do
+defmodule PandaPolls.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -11,12 +11,12 @@ defmodule Poll.DataCase do
 
   using do
     quote do
-      alias Poll.Repo
+      alias PandaPolls.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Poll.DataCase
+      import PandaPolls.DataCase
     end
   end
 

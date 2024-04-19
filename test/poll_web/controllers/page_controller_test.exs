@@ -1,5 +1,5 @@
-defmodule PollWeb.PageControllerTest do
-  use PollWeb.ConnCase
+defmodule PandaPollsWeb.PageControllerTest do
+  use PandaPollsWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

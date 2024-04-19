@@ -1,8 +1,8 @@
-defmodule PollWeb.UserRegistrationLiveTest do
-  use PollWeb.ConnCase, async: true
+defmodule PandaPollsWeb.UserRegistrationLiveTest do
+  use PandaPollsWeb.ConnCase, async: true
 
   import Phoenix.LiveViewTest
-  import Poll.UsersFixtures
+  import PandaPolls.UsersFixtures
 
   describe "Registration page" do
     test "renders registration page", %{conn: conn} do
