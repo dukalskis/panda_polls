@@ -9,10 +9,9 @@ defmodule Poll.Application do
   def start(_type, _args) do
     children = [
       PollWeb.Telemetry,
+      Poll.Repo,
       {Phoenix.PubSub, name: Poll.PubSub},
-      # Start a worker by calling: Poll.Worker.start_link(arg)
-      # {Poll.Worker, arg},
-      # Start to serve requests, typically the last entry
+      Poll.RegisterServer,
       PollWeb.Endpoint
     ]
 
