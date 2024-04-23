@@ -9,7 +9,6 @@ defmodule PandaPolls.Users do
   @doc """
   Gets the user with the given username.
 
-
   ## Examples
 
       iex> get_user_by_username(username)
@@ -27,7 +26,6 @@ defmodule PandaPolls.Users do
 
   @doc """
   Gets the user with the given signed token.
-
 
   ## Examples
 
@@ -91,7 +89,7 @@ defmodule PandaPolls.Users do
   @doc """
   Generates a session token.
 
-    ## Examples
+  ## Examples
 
       iex> generate_user_session_token(user)
       <<17, 136, 126, 40, 187, ...>>
@@ -105,7 +103,7 @@ defmodule PandaPolls.Users do
   @doc """
   Deletes the signed token with the given context.
 
-    ## Examples
+  ## Examples
 
       iex> delete_user_session_token(token)
       :ok

@@ -51,7 +51,7 @@ defmodule PandaPolls.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:bandit, "~> 1.2"},
-      {:uuid_v7, "~> 0.3.1"},
+      {:uuid_v7, "~> 0.4.3"},
       {:ecto, "~> 3.11", override: true},
       {:etso, "~> 1.1"}
     ]

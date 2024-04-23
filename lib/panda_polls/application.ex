@@ -12,6 +12,7 @@ defmodule PandaPolls.Application do
       PandaPolls.Repo,
       {Phoenix.PubSub, name: PandaPolls.PubSub},
       PandaPolls.RegisterServer,
+      PandaPolls.PollSupervisor,
       PandaPollsWeb.Endpoint
     ]
 
