@@ -12,5 +12,6 @@ defmodule PandaPolls.Model.Answer do
     model
     |> cast(attrs, fields)
     |> validate_required([:answer])
+    |> validate_length(:answer, max: 120)
   end
 end

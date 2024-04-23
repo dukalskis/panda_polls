@@ -4,6 +4,7 @@ defmodule PandaPolls.Model.Poll do
   schema "polls" do
     field :question, :string
 
+    belongs_to :user, Model.User
     embeds_many :answers, Model.Answer
 
     timestamps()
@@ -15,8 +16,10 @@ defmodule PandaPolls.Model.Poll do
 
     model
     |> cast(attrs, fields -- embeds)
-    |> validate_required([:question])
+    |> validate_required([:question, :user_id])
+    |> validate_length(:question, max: 240)
     |> cast_embed(:answers, required: true)
+    |> validate_length(:answers, min: 2)
   end
 
   def update_answers_changeset(%Poll{} = model, answers) do

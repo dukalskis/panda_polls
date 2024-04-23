@@ -12,6 +12,7 @@ defmodule PandaPolls.PollsFixtures do
       attrs
       |> Enum.into(%{
         question: "Random question",
+        user_id: "018f0b97-0ab9-75b4-bc00-001b8af94f9d",
         answers: [
           %{answer: "Random answer 1"},
           %{answer: "Random answer 2"}
