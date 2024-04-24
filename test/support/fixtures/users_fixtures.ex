@@ -16,7 +16,7 @@ defmodule PandaPolls.UsersFixtures do
     {:ok, user} =
       attrs
       |> valid_user_attributes()
-      |> PandaPolls.Users.register_user()
+      |> PandaPolls.RegisterServer.register_user()
 
     user
   end

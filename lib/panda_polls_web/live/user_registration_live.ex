@@ -2,6 +2,7 @@ defmodule PandaPollsWeb.UserRegistrationLive do
   use PandaPollsWeb, :live_view
 
   alias PandaPolls.Users
+  alias PandaPolls.RegisterServer
 
   def render(assigns) do
     ~H"""
@@ -52,7 +53,7 @@ defmodule PandaPollsWeb.UserRegistrationLive do
   end
 
   def handle_event("save", %{"user" => user_params}, socket) do
-    case Users.register_user(user_params) do
+    case RegisterServer.register_user(user_params) do
       {:ok, user} ->
         changeset = Users.change_user(user)
         {:noreply, socket |> assign(trigger_submit: true) |> assign_form(changeset)}

@@ -6,6 +6,7 @@ defmodule PandaPolls.UsersTest do
   alias PandaPolls.Model.User
   alias PandaPolls.Model.UserToken
   alias PandaPolls.Users
+  alias PandaPolls.RegisterServer
 
   describe "get_user_by_username/1" do
     test "does not return the user if the username does not exist" do
@@ -20,17 +21,17 @@ defmodule PandaPolls.UsersTest do
 
   describe "register_user/1" do
     test "requires username to be set" do
-      {:error, changeset} = Users.register_user(%{})
+      {:error, changeset} = RegisterServer.register_user(%{})
 
       assert %{username: ["can't be blank"]} = errors_on(changeset)
     end
 
     test "validates username uniqueness" do
       %{username: username} = user_fixture()
-      {:error, changeset} = Users.register_user(%{username: username})
+      {:error, changeset} = RegisterServer.register_user(%{username: username})
       assert "has already been taken" in errors_on(changeset).username
 
-      userx = Users.register_user(%{username: String.upcase(username)})
+      userx = RegisterServer.register_user(%{username: String.upcase(username)})
 
       # Now try with the upper cased username too, to check that username case is ignored.
       {:error, changeset} = userx

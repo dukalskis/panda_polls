@@ -3,7 +3,6 @@ defmodule PandaPolls.Users do
 
   alias PandaPolls.Model.User
   alias PandaPolls.Model.UserToken
-  alias PandaPolls.RegisterServer
   alias PandaPolls.Repo
 
   @doc """
@@ -44,22 +43,6 @@ defmodule PandaPolls.Users do
       |> Repo.preload(:user)
 
     user_token && user_token.user
-  end
-
-  @doc """
-  Registers a user.
-
-  ## Examples
-
-      iex> register_user(params)
-      {:ok, %User{}}
-
-      iex> register_user(params_not_valid)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def register_user(params) do
-    RegisterServer.register_user(params)
   end
 
   @doc """
