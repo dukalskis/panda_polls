@@ -1,11 +1,13 @@
 defmodule PandaPolls.Model.Poll do
   use PandaPolls.Model
 
+  @min_answers 2
+
   schema "polls" do
     field :question, :string
 
     belongs_to :user, Model.User
-    embeds_many :answers, Model.Answer
+    embeds_many :answers, Model.Answer, on_replace: :delete
 
     timestamps()
   end
@@ -18,8 +20,16 @@ defmodule PandaPolls.Model.Poll do
     |> cast(attrs, fields -- embeds)
     |> validate_required([:question, :user_id])
     |> validate_length(:question, max: 240)
-    |> cast_embed(:answers, required: true)
-    |> validate_length(:answers, min: 2)
+    |> cast_embed(:answers,
+      required: true,
+      required_message: "should have at least #{@min_answers} answers",
+      sort_param: :answers_sort,
+      drop_param: :answers_drop
+    )
+    |> validate_length(:answers,
+      min: @min_answers,
+      message: "should have at least %{count} answers"
+    )
   end
 
   def update_answers_changeset(%Poll{} = model, answers) do

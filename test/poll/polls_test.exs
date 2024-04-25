@@ -2,6 +2,7 @@ defmodule PandaPolls.PollsTest do
   use PandaPolls.DataCase
 
   import PandaPolls.PollsFixtures
+  import PandaPolls.UsersFixtures
 
   alias PandaPolls.Model.Poll
   alias PandaPolls.Polls
@@ -11,10 +12,12 @@ defmodule PandaPolls.PollsTest do
 
   describe "Polls.list_polls/0" do
     test "returns all polls" do
-      poll = poll_fixture()
+      user = user_fixture()
+      poll = poll_fixture(%{user_id: user.id})
       list_polls = Polls.list_polls()
 
-      assert Enum.find(list_polls, fn p -> p.id == poll.id end)
+      assert poll = Enum.find(list_polls, fn p -> p.id == poll.id end)
+      assert poll.user.id == user.id
     end
   end
 
@@ -46,7 +49,8 @@ defmodule PandaPolls.PollsTest do
     test "requires question and answers to be set" do
       {:error, changeset} = Polls.create_poll(%{question: ""})
 
-      assert %{question: ["can't be blank"], answers: ["can't be blank"]} = errors_on(changeset)
+      assert %{question: ["can't be blank"], answers: ["should have at least 2 answers"]} =
+               errors_on(changeset)
     end
 
     test "requires answer to be set" do
@@ -58,7 +62,7 @@ defmodule PandaPolls.PollsTest do
     test "requires at least 2 answers" do
       {:error, changeset} = Polls.create_poll(%{answers: [%{answer: "a1"}]})
 
-      assert %{answers: ["should have at least 2 item(s)"]} = errors_on(changeset)
+      assert %{answers: ["should have at least 2 answers"]} = errors_on(changeset)
     end
 
     test "validates max length of the question" do

@@ -21,6 +21,8 @@ defmodule PandaPollsWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    delete "/users/log_out", UserSessionController, :delete
   end
 
   scope "/", PandaPollsWeb do
@@ -36,13 +38,13 @@ defmodule PandaPollsWeb.Router do
   end
 
   scope "/", PandaPollsWeb do
-    pipe_through [:browser]
+    pipe_through [:browser, :require_authenticated_user]
 
-    delete "/users/log_out", UserSessionController, :delete
+    live_session :require_authenticated_user,
+      on_mount: [{PandaPollsWeb.UserAuth, :ensure_authenticated}] do
+      live "/polls", PollLive.Index, :index
+      live "/polls/new", PollLive.Index, :new
+      live "/polls/:id", PollLive.Show, :show
+    end
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", PandaPollsWeb do
-  #   pipe_through :api
-  # end
 end

@@ -17,7 +17,10 @@ defmodule PandaPolls.Polls do
 
   """
   def list_polls do
-    Repo.all(Poll)
+    Poll
+    |> order_by([p], desc: p.id)
+    |> Repo.all()
+    |> Repo.preload(:user)
   end
 
   @doc """

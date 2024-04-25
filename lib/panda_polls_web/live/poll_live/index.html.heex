@@ -1,0 +1,29 @@
+<.header>
+  Polls
+  <:actions>
+    <.link patch={~p"/polls/new"}>
+      <.button>New Poll</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="polls"
+  rows={@streams.polls}
+  row_click={fn {_id, poll} -> JS.navigate(~p"/polls/#{poll}") end}
+>
+  <:col :let={{_id, poll}} label="Question"><%= poll.question %></:col>
+  <:col :let={{_id, poll}} label="Author"><%= poll.user.username %></:col>
+  <:col :let={{_id, poll}} label="Date"><%= poll.inserted_at %></:col>
+</.table>
+
+<.modal :if={@live_action == :new} id="poll-modal" show on_cancel={JS.patch(~p"/polls")}>
+  <.live_component
+    module={PandaPollsWeb.PollLive.FormComponent}
+    id={:new}
+    title={@page_title}
+    action={@live_action}
+    patch={~p"/polls"}
+    user_id={@user_id}
+  />
+</.modal>
