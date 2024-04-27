@@ -6,6 +6,20 @@ defmodule PandaPolls.Users do
   alias PandaPolls.Repo
 
   @doc """
+  Gets a user by id.
+
+  ## Examples
+
+      iex> get_user(id)
+      %User{}
+
+      iex> get_user(wrong_id)
+      nil
+
+  """
+  def get_user(id), do: Repo.get(User, id)
+
+  @doc """
   Gets the user with the given username.
 
   ## Examples

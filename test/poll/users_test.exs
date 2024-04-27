@@ -8,6 +8,19 @@ defmodule PandaPolls.UsersTest do
   alias PandaPolls.Users
   alias PandaPolls.RegisterServer
 
+  @nonexisting_id "018f0b97-0ab9-75b4-bd00-000c7584a6d1"
+
+  describe "get_user/1" do
+    test "does not return the user if the given id does not exist" do
+      refute Users.get_user(@nonexisting_id)
+    end
+
+    test "returns the user with the given id" do
+      %{id: id} = user_fixture()
+      assert %User{id: ^id} = Users.get_user(id)
+    end
+  end
+
   describe "get_user_by_username/1" do
     test "does not return the user if the username does not exist" do
       refute Users.get_user_by_username("unknown_username")

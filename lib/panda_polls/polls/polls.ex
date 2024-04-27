@@ -90,6 +90,7 @@ defmodule PandaPolls.Polls do
     |> Repo.insert()
     # Start GenServer for each poll
     |> start_server()
+    |> PandaPolls.broadcast(Poll, :created)
   end
 
   defp start_server({:ok, %Poll{} = poll}) do
