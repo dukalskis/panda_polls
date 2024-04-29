@@ -3,3 +3,9 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+@layer components {
+  .link {
+    @apply inline-block font-bold underline hover:decoration-2 hover:decoration-brand;
+  }
+}

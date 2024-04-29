@@ -42,7 +42,7 @@ defmodule PandaPollsWeb.PollLive.FormComponent do
                 />
                 <.icon
                   name="hero-x-mark"
-                  class="w-8 h-8 relative top-9 bg-red-500 hover:bg-red-700 hover:cursor-pointer"
+                  class="w-8 h-8 relative top-10 bg-black hover:bg-brand hover:cursor-pointer"
                 />
               </label>
             </div>
@@ -51,24 +51,17 @@ defmodule PandaPollsWeb.PollLive.FormComponent do
 
         <% # Errors block %>
 
-        <div
-          :if={@show_error_block}
-          class="rounded-lg p-3 ring-1 bg-rose-50 text-rose-900 shadow-md ring-rose-500 fill-rose-900"
-        >
-          <p class="flex items-center gap-1.5 text-sm font-semibold leading-6">
-            <.icon name="hero-exclamation-circle-mini" class="h-4 w-4" /> Error
-          </p>
-          <p class="mt-2 text-sm leading-5">
-            Looks like there are errors in your form. Please review and correct them before saving.
-          </p>
-        </div>
+        <.error_block :if={@show_error_block}>
+          Looks like there are errors in your form. Please review and correct them before saving.
+        </.error_block>
 
         <% # Buttons %>
 
         <:actions>
           <label class={[
-            "py-2 px-3 inline-block cursor-pointer bg-green-500 hover:bg-green-700",
-            "rounded-lg text-center text-white text-sm font-semibold leading-6 select-none"
+            "h-12 border-black border-2 p-2.5 bg-white font-medium",
+            "hover:shadow-[2px_2px_0px_rgba(0,0,0,1)]",
+            "focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
           ]}>
             <input type="checkbox" name="poll[answers_sort][]" class="hidden" /> Add Answer
           </label>

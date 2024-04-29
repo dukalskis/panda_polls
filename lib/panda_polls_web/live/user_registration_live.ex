@@ -8,10 +8,10 @@ defmodule PandaPollsWeb.UserRegistrationLive do
     ~H"""
     <div class="mx-auto max-w-sm">
       <.header class="text-center">
-        Register for an account
+        Create Account
         <:subtitle>
           Already registered?
-          <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
+          <.link navigate={~p"/users/log_in"} class="link">
             Log in
           </.link>
           to your account now.
@@ -27,9 +27,9 @@ defmodule PandaPollsWeb.UserRegistrationLive do
         action={~p"/users/log_in?_action=registered"}
         method="post"
       >
-        <.error :if={@check_errors}>
+        <.error_block :if={@check_errors}>
           Oops, something went wrong! Please check the errors below.
-        </.error>
+        </.error_block>
 
         <.input field={@form[:username]} type="text" label="Username" required />
 

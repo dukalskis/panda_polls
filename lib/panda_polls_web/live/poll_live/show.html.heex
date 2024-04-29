@@ -24,7 +24,7 @@
     <label for={"meter_#{answer.id}"}><%= answer.answer %> <%= answer.votes %></label>
     <br />
 
-    <meter for={"meter_#{answer.id}"} value={value} min="0" max="100"><%= value %>%</meter>
+    <meter id={"meter_#{answer.id}"} value={value} min="0" max="100"><%= value %>%</meter>
   </div>
 
   <p>

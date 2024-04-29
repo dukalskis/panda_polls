@@ -20,7 +20,7 @@ defmodule PandaPolls.Model.Poll do
     model
     |> cast(attrs, fields -- embeds)
     |> validate_required([:question, :user_id])
-    |> validate_length(:question, max: 240)
+    |> validate_length(:question, max: 100)
     |> cast_embed(:answers,
       required: true,
       required_message: "should have at least #{@min_answers} answers",
