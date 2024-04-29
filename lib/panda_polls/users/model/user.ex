@@ -18,6 +18,8 @@ defmodule PandaPolls.Model.User do
     model
     |> cast(attrs, fields)
     |> validate_required([:username])
+    |> validate_length(:username, max: 16)
+    |> validate_format(:username, ~r/^[A-Za-z0-9_-]+$/)
   end
 
   def register_changeset(changeset) do
