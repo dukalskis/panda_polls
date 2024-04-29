@@ -5,6 +5,7 @@ defmodule PandaPolls.Model.Poll do
 
   schema "polls" do
     field :question, :string
+    field :last_vote_id, UUIDv7
 
     belongs_to :user, Model.User
     embeds_many :answers, Model.Answer, on_replace: :delete
@@ -32,9 +33,9 @@ defmodule PandaPolls.Model.Poll do
     )
   end
 
-  def update_answers_changeset(%Poll{} = model, answers) do
+  def update_answers_changeset(%Poll{} = model, answers, last_vote_id) do
     model
-    |> change()
+    |> change(last_vote_id: last_vote_id)
     |> put_embed(:answers, answers)
   end
 end

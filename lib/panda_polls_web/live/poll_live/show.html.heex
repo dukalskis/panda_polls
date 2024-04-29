@@ -2,4 +2,34 @@
   <%= @poll.question %>
 </.header>
 
+<div
+  :for={answer <- @poll.answers}
+  :if={not @has_voted}
+  id={"answer_#{answer.id}"}
+  class="mt-4 p-2 hover:bg-slate-300 border-2 border-black cursor-pointer"
+  phx-click="select_answer"
+  phx-value-id={answer.id}
+>
+  <%= answer.answer %> <%= answer.votes %>
+</div>
+
+<div :if={@show_results}>
+  <div
+    :for={answer <- @poll.answers}
+    id={"result_#{answer.id}"}
+    class="mt-4 p-2 border-2 border-black cursor-pointer"
+  >
+    <% value = answer_value(answer.votes, @total_votes) %>
+
+    <label for={"meter_#{answer.id}"}><%= answer.answer %> <%= answer.votes %></label>
+    <br />
+
+    <meter for={"meter_#{answer.id}"} value={value} min="0" max="100"><%= value %>%</meter>
+  </div>
+
+  <p>
+    Total: <%= @total_votes %> votes
+  </p>
+</div>
+
 <.back navigate={~p"/polls"}>Back to polls</.back>

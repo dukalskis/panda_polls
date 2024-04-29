@@ -115,17 +115,17 @@ defmodule PandaPolls.Polls do
 
   """
   def create_vote(poll, answer_id, user_id) do
-    {:ok, _vote} =
+    {:ok, vote} =
       poll.id
       |> Vote.changeset(answer_id, user_id)
       |> Repo.insert()
 
-    {:ok, poll} = inc_answer_votes(poll, answer_id)
+    {:ok, poll} = inc_answer_votes(poll, answer_id, vote.id)
 
     poll
   end
 
-  defp inc_answer_votes(poll, answer_id) do
+  defp inc_answer_votes(poll, answer_id, last_vote_id) do
     answers =
       Enum.map(poll.answers, fn
         %Answer{id: ^answer_id} = answer ->
@@ -136,8 +136,9 @@ defmodule PandaPolls.Polls do
       end)
 
     poll
-    |> Poll.update_answers_changeset(answers)
+    |> Poll.update_answers_changeset(answers, last_vote_id)
     |> Repo.update()
+    |> PandaPolls.broadcast(Poll, :updated, id: poll.id)
   end
 
   @doc """

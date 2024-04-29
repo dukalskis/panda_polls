@@ -11,34 +11,36 @@ defmodule PandaPolls do
     Phoenix.PubSub.subscribe(PandaPolls.PubSub, topic)
   end
 
-  def subscribe(module, action) do
-    {module, action}
-    |> pubsub_topic()
-    |> subscribe()
+  def subscribe(module, action, params \\ []) do
+    topic = pubsub_topic(module, action, params)
+
+    subscribe(topic)
   end
 
   def broadcast(topic, message) when is_binary(topic) do
     Phoenix.PubSub.broadcast(PandaPolls.PubSub, topic, message)
   end
 
-  def broadcast({:ok, struct}, module, action) do
-    broadcast(module, action, struct)
+  def broadcast(insert_or_update_result, module, action, params \\ [])
+
+  def broadcast({:ok, struct}, module, action, params) do
+    message = {module, {action, struct}}
+    topic = pubsub_topic(module, action, params)
+
+    broadcast(topic, message)
+
     {:ok, struct}
   end
 
-  def broadcast({:error, changeset}, _module, _action) do
+  def broadcast({:error, changeset}, _module, _action, _params) do
     {:error, changeset}
   end
 
-  def broadcast(module, action, payload) do
-    message = {module, {action, payload}}
+  def pubsub_topic(module, action, params) do
+    topic = to_string(module) <> ":" <> to_string(action)
 
-    {module, action}
-    |> pubsub_topic()
-    |> broadcast(message)
-  end
-
-  defp pubsub_topic({module, action}) do
-    to_string(module) <> ":" <> to_string(action)
+    Enum.reduce(params, topic, fn {key, value}, acc ->
+      acc <> ":" <> to_string(key) <> "=" <> to_string(value)
+    end)
   end
 end
