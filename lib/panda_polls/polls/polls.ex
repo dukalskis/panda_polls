@@ -54,6 +54,22 @@ defmodule PandaPolls.Polls do
   def get_poll!(id), do: Repo.get!(Poll, id)
 
   @doc """
+  Gets a vote by id.
+
+  ## Examples
+
+      iex> get_vote(id)
+      %Vote{}
+
+      iex> get_vote(wrong_id)
+      nil
+
+  """
+  def get_vote(id) do
+    Repo.get(Vote, id)
+  end
+
+  @doc """
   Gets a vote by poll_id and user_id.
 
   ## Examples

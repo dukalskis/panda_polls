@@ -18,6 +18,7 @@ module.exports = {
         'brand-300': "#fcd34d",
         'brand-400': "#fbbf24",
         'brand-600': "#ca8a04",
+        'brand-700': "#b45309",
         'error': '#b91c1c'
       }
     },

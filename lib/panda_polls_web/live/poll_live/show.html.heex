@@ -2,34 +2,45 @@
   <%= @poll.question %>
 </.header>
 
-<div
-  :for={answer <- @poll.answers}
-  :if={not @has_voted}
-  id={"answer_#{answer.id}"}
-  class="mt-4 p-2 hover:bg-slate-300 border-2 border-black cursor-pointer"
-  phx-click="select_answer"
-  phx-value-id={answer.id}
->
-  <%= answer.answer %> <%= answer.votes %>
-</div>
-
-<div :if={@show_results}>
-  <div
-    :for={answer <- @poll.answers}
-    id={"result_#{answer.id}"}
-    class="mt-4 p-2 border-2 border-black cursor-pointer"
-  >
-    <% value = answer_value(answer.votes, @total_votes) %>
-
-    <label for={"meter_#{answer.id}"}><%= answer.answer %> <%= answer.votes %></label>
-    <br />
-
-    <meter id={"meter_#{answer.id}"} value={value} min="0" max="100"><%= value %>%</meter>
+<div :if={not @has_voted} class="mt-6 mb-6">
+  <div :for={answer <- @poll.answers} :if={not @has_voted} class="mb-4">
+    <.button class="block w-full truncate" phx-click="select_answer" phx-value-id={answer.id}>
+      <%= answer.answer %>
+    </.button>
   </div>
-
-  <p>
-    Total: <%= @total_votes %> votes
-  </p>
 </div>
 
-<.back navigate={~p"/polls"}>Back to polls</.back>
+<h3 class="mt-4 mb-2 font-bold text-xl">
+  Results
+</h3>
+
+<div :for={answer <- @poll.answers} class="mb-4">
+  <% value = answer_value(answer.votes, @total_votes) %>
+
+  <div class="flex justify-between items-end mb-1">
+    <span class="flex gap-1 items-center text-base font-medium text-black truncate">
+      <.icon
+        :if={@vote_answer_id == answer.id}
+        name="hero-check-badge-solid"
+        class="h-4 w-4 text-brand-700"
+      />
+      <%= answer.answer %>
+    </span>
+    <span class="text-sm font-medium text-black ml-2">
+      <%= value %>%
+    </span>
+  </div>
+  <div class="w-full bg-black h-3.5 ">
+    <div class="bg-brand h-3.5" style={"width: #{value}%"}></div>
+  </div>
+</div>
+
+<.list>
+  <:item title="Total"><%= @total_votes %> vote<%= if @total_votes != 1, do: "s" %></:item>
+  <:item title="Author"><%= @author_username %></:item>
+  <:item title="Date"><%= @poll.inserted_at %></:item>
+</.list>
+
+<p class="mt-6">
+  <.link navigate={~p"/polls"} class="link">Back to polls</.link>
+</p>

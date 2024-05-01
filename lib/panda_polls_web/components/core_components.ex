@@ -377,12 +377,14 @@ defmodule PandaPollsWeb.CoreComponents do
         name={@name}
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
-        class={[
-          "w-full mt-2 block border-black border-2 p-2.5",
-          # Remove focus outline
-          "focus:outline-none focus:border-black focus:ring-0",
-          "focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-brand-300 active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
-        ]}
+        class={
+          [
+            "w-full mt-2 block border-black border-2 p-2.5",
+            # Remove focus outline
+            "focus:outline-none focus:border-black focus:ring-0",
+            "focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-brand-300 active:shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+          ]
+        }
         {@rest}
       />
       <.error :for={msg <- @errors}><%= msg %></.error>
@@ -496,9 +498,7 @@ defmodule PandaPollsWeb.CoreComponents do
     <div class="overflow-y-auto sm:overflow-visible">
       <table class="w-[32rem] mt-11 sm:w-full">
         <colgroup>
-            <col
-              :for={{_col, i} <- Enum.with_index(@col)}
-             width={if i == 0, do: "100%", else: "0%"} />
+          <col :for={{_col, i} <- Enum.with_index(@col)} width={if i == 0, do: "100%", else: "0%"} />
         </colgroup>
         <thead class="text-sm text-left leading-6 text-black border-black border-b-4">
           <tr>
@@ -517,7 +517,12 @@ defmodule PandaPollsWeb.CoreComponents do
             <td
               :for={{col, i} <- Enum.with_index(@col)}
               phx-click={@row_click && @row_click.(row)}
-              class={["relative p-0", i == 0 && "truncate max-w-px", i != 0 && "whitespace-nowrap", @row_click && "hover:cursor-pointer"]}
+              class={[
+                "relative p-0",
+                i == 0 && "truncate max-w-px",
+                i != 0 && "whitespace-nowrap",
+                @row_click && "hover:cursor-pointer"
+              ]}
             >
               <div class="block py-4 pr-4 truncate">
                 <span class="absolute inset-0 group-hover:bg-brand-300" />
@@ -560,38 +565,12 @@ defmodule PandaPollsWeb.CoreComponents do
 
   def list(assigns) do
     ~H"""
-    <div class="mt-14">
-      <dl class="-my-4 divide-y divide-zinc-100">
-        <div :for={item <- @item} class="flex gap-4 py-4 text-sm leading-6 sm:gap-8">
-          <dt class="w-1/4 flex-none text-zinc-500"><%= item.title %></dt>
-          <dd class="text-zinc-700"><%= render_slot(item) %></dd>
-        </div>
-      </dl>
-    </div>
-    """
-  end
-
-  @doc """
-  Renders a back navigation link.
-
-  ## Examples
-
-      <.back navigate={~p"/posts"}>Back to posts</.back>
-  """
-  attr :navigate, :any, required: true
-  slot :inner_block, required: true
-
-  def back(assigns) do
-    ~H"""
-    <div class="mt-16">
-      <.link
-        navigate={@navigate}
-        class="text-sm font-semibold leading-6 text-zinc-900 hover:text-zinc-700"
-      >
-        <.icon name="hero-arrow-left-solid" class="h-3 w-3" />
-        <%= render_slot(@inner_block) %>
-      </.link>
-    </div>
+    <dl class="mt-6">
+      <div :for={item <- @item} class="flex gap-2 py-1 leading-6">
+        <dt class="font-bold"><%= item.title %></dt>
+        <dd><%= render_slot(item) %></dd>
+      </div>
+    </dl>
     """
   end
 
