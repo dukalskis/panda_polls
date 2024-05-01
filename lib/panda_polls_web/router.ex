@@ -20,13 +20,13 @@ defmodule PandaPollsWeb.Router do
   scope "/", PandaPollsWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
-
     delete "/users/log_out", UserSessionController, :delete
   end
 
   scope "/", PandaPollsWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
+
+    get "/", PageController, :home
 
     live_session :redirect_if_user_is_authenticated,
       on_mount: [{PandaPollsWeb.UserAuth, :redirect_if_user_is_authenticated}] do
