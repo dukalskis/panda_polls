@@ -38,7 +38,9 @@
 <.list>
   <:item title="Total"><%= @total_votes %> vote<%= if @total_votes != 1, do: "s" %></:item>
   <:item title="Author"><%= @author_username %></:item>
-  <:item title="Date"><%= @poll.inserted_at %></:item>
+  <:item title="Date">
+    <.datetime value={@poll.inserted_at} id={"datetime_#{@poll.id}"} />
+  </:item>
 </.list>
 
 <p class="mt-6">

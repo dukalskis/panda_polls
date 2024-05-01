@@ -601,6 +601,22 @@ defmodule PandaPollsWeb.CoreComponents do
     """
   end
 
+  @doc """
+  Renders a datetime.
+  Later JS takes value and format datetime according to browswer timezone.
+  """
+  attr :value, NaiveDateTime, required: true
+  attr :id, :string, required: true
+
+  def datetime(assigns) do
+    ~H"""
+    <% datetime = NaiveDateTime.to_string(@value) %>
+    <span phx-hook="DateTime" data-value={datetime <> "Z"} id={@id}>
+      <%= datetime %>
+    </span>
+    """
+  end
+
   ## JS Commands
 
   def show(js \\ %JS{}, selector) do

@@ -14,7 +14,9 @@
 >
   <:col :let={{_id, poll}} label="Question"><%= poll.question %></:col>
   <:col :let={{_id, poll}} label="Author"><%= poll.user.username %></:col>
-  <:col :let={{_id, poll}} label="Date"><%= poll.inserted_at %></:col>
+  <:col :let={{_id, poll}} label="Date">
+    <.datetime value={poll.inserted_at} id={"datetime_#{poll.id}"} />
+  </:col>
 </.table>
 
 <.modal :if={@live_action == :new} id="poll-modal" show on_cancel={JS.patch(~p"/polls")}>

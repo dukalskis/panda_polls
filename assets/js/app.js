@@ -22,8 +22,19 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
+// "sv-SE" format is like default NaiveDateTime.to_string/1
+const format_datetime = (value) => new Date(value).toLocaleString("sv-SE")
+
+let Hooks = {}
+Hooks.DateTime = {
+  mounted() {
+    this.el.innerHTML = format_datetime(this.el.dataset.value)
+  }
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
+  hooks: Hooks,
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken}
 })
