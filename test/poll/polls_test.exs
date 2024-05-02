@@ -69,14 +69,14 @@ defmodule PandaPolls.PollsTest do
       question = String.duplicate("a", 250)
       {:error, changeset} = Polls.create_poll(%{question: question})
 
-      assert %{question: ["should be at most 240 character(s)"]} = errors_on(changeset)
+      assert %{question: ["should be at most 100 character(s)"]} = errors_on(changeset)
     end
 
     test "validates max length of the answer" do
       answer = String.duplicate("a", 130)
       {:error, changeset} = Polls.create_poll(%{answers: [%{answer: answer}]})
 
-      assert %{answers: [%{answer: ["should be at most 120 character(s)"]}]} =
+      assert %{answers: [%{answer: ["should be at most 40 character(s)"]}]} =
                errors_on(changeset)
     end
 

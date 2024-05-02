@@ -8,8 +8,7 @@ defmodule PandaPollsWeb.UserLoginLiveTest do
     test "renders log in page", %{conn: conn} do
       {:ok, _lv, html} = live(conn, ~p"/users/log_in")
 
-      assert html =~ "Log in"
-      assert html =~ "Register"
+      assert html =~ "Log in to account"
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -17,7 +16,7 @@ defmodule PandaPollsWeb.UserLoginLiveTest do
         conn
         |> log_in_user(user_fixture())
         |> live(~p"/users/log_in")
-        |> follow_redirect(conn, "/")
+        |> follow_redirect(conn, "/polls")
 
       assert {:ok, _conn} = result
     end
@@ -34,7 +33,7 @@ defmodule PandaPollsWeb.UserLoginLiveTest do
 
       conn = submit_form(form, conn)
 
-      assert redirected_to(conn) == ~p"/"
+      assert redirected_to(conn) == ~p"/polls"
     end
   end
 
@@ -48,7 +47,7 @@ defmodule PandaPollsWeb.UserLoginLiveTest do
         |> render_click()
         |> follow_redirect(conn, ~p"/users/register")
 
-      assert login_html =~ "Register"
+      assert login_html =~ "Create Account"
     end
   end
 end

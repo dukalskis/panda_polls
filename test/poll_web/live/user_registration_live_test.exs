@@ -8,7 +8,7 @@ defmodule PandaPollsWeb.UserRegistrationLiveTest do
     test "renders registration page", %{conn: conn} do
       {:ok, _lv, html} = live(conn, ~p"/users/register")
 
-      assert html =~ "Register"
+      assert html =~ "Create Account"
       assert html =~ "Log in"
     end
 
@@ -17,7 +17,7 @@ defmodule PandaPollsWeb.UserRegistrationLiveTest do
         conn
         |> log_in_user(user_fixture())
         |> live(~p"/users/register")
-        |> follow_redirect(conn, "/")
+        |> follow_redirect(conn, "/polls")
 
       assert {:ok, _conn} = result
     end
@@ -32,10 +32,10 @@ defmodule PandaPollsWeb.UserRegistrationLiveTest do
       render_submit(form)
       conn = follow_trigger_action(form, conn)
 
-      assert redirected_to(conn) == ~p"/"
+      assert redirected_to(conn) == ~p"/polls"
 
       # Now do a logged in request and assert on the menu
-      conn = get(conn, "/")
+      conn = get(conn, "/polls")
       response = html_response(conn, 200)
       assert response =~ username
       assert response =~ "Log out"

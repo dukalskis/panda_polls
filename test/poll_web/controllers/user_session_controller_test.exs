@@ -15,10 +15,10 @@ defmodule PandaPollsWeb.UserSessionControllerTest do
         })
 
       assert get_session(conn, :user_token)
-      assert redirected_to(conn) == ~p"/"
+      assert redirected_to(conn) == ~p"/polls"
 
       # Now do a logged in request and assert on the menu
-      conn = get(conn, ~p"/")
+      conn = get(conn, ~p"/polls")
       response = html_response(conn, 200)
       assert response =~ user.username
       assert response =~ ~p"/users/log_out"
@@ -48,7 +48,7 @@ defmodule PandaPollsWeb.UserSessionControllerTest do
           }
         })
 
-      assert redirected_to(conn) == ~p"/"
+      assert redirected_to(conn) == ~p"/polls"
       assert Phoenix.Flash.get(conn.assigns.flash, :info) =~ "Account created successfully"
     end
 
