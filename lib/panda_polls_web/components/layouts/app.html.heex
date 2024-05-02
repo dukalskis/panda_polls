@@ -3,17 +3,13 @@
     PANDA<span class="text-brand">POLLS</span>
   </.link>
   <%= if @current_user do %>
-      <div class="flex flex-col items-end">
-          <.link
-            href={~p"/users/log_out"}
-            method="delete"
-            class="link text-[0.8125rem]"
-          >
-            Log out
-          </.link>
-        <span class="text-[0.8125rem] leading-6 text-zinc-900">
-          <%= @current_user.username %>
-        </span>
+    <div class="flex flex-col items-end">
+      <.link href={~p"/users/log_out"} method="delete" class="link text-[0.8125rem]">
+        Log out
+      </.link>
+      <span class="text-[0.8125rem] leading-6 text-zinc-900">
+        <%= @current_user.username %>
+      </span>
     </div>
   <% end %>
 </header>
