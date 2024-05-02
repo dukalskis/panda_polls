@@ -497,7 +497,7 @@ defmodule PandaPollsWeb.CoreComponents do
 
     ~H"""
     <div class="overflow-y-auto sm:overflow-visible">
-      <table class="w-[32rem] mt-11 sm:w-full">
+      <table class="w-[32rem] sm:w-full mt-11">
         <colgroup>
           <col :for={{_col, i} <- Enum.with_index(@col)} width={if i == 0, do: "100%", else: "0%"} />
         </colgroup>
