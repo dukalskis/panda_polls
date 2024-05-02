@@ -10,7 +10,7 @@ defmodule PandaPolls.UsersFixtures do
       |> to_string()
       |> String.slice(9, 10)
 
-     "u_#{username}"
+    "u_#{username}"
   end
 
   def valid_user_attributes(attrs \\ %{}) do

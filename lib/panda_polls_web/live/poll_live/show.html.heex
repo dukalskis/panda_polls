@@ -14,7 +14,7 @@
   Results
 </h3>
 
-<div :for={answer <- @poll.answers} class="mb-4">
+<div :for={answer <- @poll.answers} class="mb-4" id={"answer_#{answer.id}"}>
   <% value = answer_value(answer.votes, @total_votes) %>
 
   <div class="flex justify-between items-end mb-1">
