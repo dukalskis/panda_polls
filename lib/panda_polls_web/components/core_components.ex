@@ -612,7 +612,7 @@ defmodule PandaPollsWeb.CoreComponents do
   def datetime(assigns) do
     ~H"""
     <% datetime = NaiveDateTime.to_string(@value) %>
-    <span phx-hook="DateTime" data-value={datetime <> "Z"} id={@id}>
+    <span phx-hook="DateTime" phx-update="ignore" data-value={datetime <> "Z"} id={@id}>
       <%= datetime %>
     </span>
     """
