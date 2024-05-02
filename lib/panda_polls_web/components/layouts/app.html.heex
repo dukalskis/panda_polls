@@ -1,28 +1,21 @@
-<header class="px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
-    <div class="flex items-center gap-4">
-      <a href="/">
-        <img src={~p"/images/logo.svg"} width="36" />
-      </a>
-      <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
-        v<%= Application.spec(:phoenix, :vsn) %>
-      </p>
+<header class="flex justify-between items-center px-4 sm:px-6 lg:px-8 h-14">
+  <.link navigate={if @current_user, do: ~p"/polls", else: ~p"/"} class="text-lg font-bold">
+    PANDA<span class="text-brand">POLLS</span>
+  </.link>
+  <%= if @current_user do %>
+      <div class="flex flex-col items-end">
+          <.link
+            href={~p"/users/log_out"}
+            method="delete"
+            class="link text-[0.8125rem]"
+          >
+            Log out
+          </.link>
+        <span class="text-[0.8125rem] leading-6 text-zinc-900">
+          <%= @current_user.username %>
+        </span>
     </div>
-    <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-      <a href="https://twitter.com/elixirphoenix" class="hover:text-zinc-700">
-        @elixirphoenix
-      </a>
-      <a href="https://github.com/phoenixframework/phoenix" class="hover:text-zinc-700">
-        GitHub
-      </a>
-      <a
-        href="https://hexdocs.pm/phoenix/overview.html"
-        class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
-      >
-        Get Started <span aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
-  </div>
+  <% end %>
 </header>
 <main class="px-4 py-20 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-3xl">
